@@ -90,7 +90,9 @@ export default function Hero() {
               muted
               loop
               playsInline
+              preload="auto"
               className="absolute inset-0 w-full h-full object-cover"
+              ref={(el) => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-4">

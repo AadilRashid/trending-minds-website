@@ -36,22 +36,28 @@ function LocalVideoCard({ video }) {
   useEffect(() => {
     const el = videoRef.current;
     if (!el) return;
+    el.muted = true;
+    el.setAttribute("muted", "");
+    const tryPlay = () => el.play().catch(() => {});
     const obs = new IntersectionObserver(
-      ([entry]) => { entry.isIntersecting ? el.play() : el.pause(); },
-      { threshold: 0.5 }
+      ([entry]) => { entry.isIntersecting ? tryPlay() : el.pause(); },
+      { threshold: 0.3 }
     );
     obs.observe(el);
+    tryPlay();
     return () => obs.disconnect();
   }, []);
 
   return (
-    <div className="reel-card shrink-0 w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] border border-white/10 hover:border-[#00ff87]/40 transition-all duration-500 relative group">
+    <div className="reel-card shrink-0 w-[280px] md:w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] border border-white/10 hover:border-[#00ff87]/40 transition-all duration-500 relative group">
       <video
         ref={videoRef}
         src={video.src}
-        muted={muted}
+        muted
         loop
         playsInline
+        autoPlay
+        preload="auto"
         className="w-full h-full object-cover"
       />
       {/* unmute toggle */}
