@@ -82,8 +82,8 @@ export default function Hero() {
         </div>
 
         {/* Right — reel card */}
-        <div className="hero-reel shrink-0 hidden lg:block">
-          <div className="relative w-[220px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] border border-white/10">
+        <div className="hero-reel shrink-0 flex justify-center lg:block">
+          <div className="relative w-[180px] lg:w-[220px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] border border-white/10">
             <video
               src="/videos/dont-pitch.mp4"
               autoPlay
