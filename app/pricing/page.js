@@ -177,10 +177,7 @@ export default function PricingPage() {
       gsap.from(".p-hero-sub", { y: 20, opacity: 0, duration: 0.5, ease: "power3.out", delay: 0.65 });
       gsap.from(".p-hero-cta", { y: 16, opacity: 0, duration: 0.4, ease: "power3.out", delay: 0.8 });
 
-      // Plan cards — animate on load with delay, no ScrollTrigger
-      gsap.from(".plan-card", {
-        y: 40, opacity: 0, stagger: 0.08, duration: 0.6, ease: "power3.out", delay: 1.0,
-      });
+      // Plan cards — no animation, always visible
 
       // Process items
       gsap.from(".process-item", {

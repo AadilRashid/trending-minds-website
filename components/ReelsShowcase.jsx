@@ -124,7 +124,7 @@ export default function ReelsShowcase() {
       });
       gsap.from(".reel-card", {
         x: 50, opacity: 0, stagger: 0.1, duration: 0.7, ease: "power3.out", delay: 0.2,
-        scrollTrigger: { trigger: trackRef.current, start: "top 90%", once: true },
+        scrollTrigger: { trigger: trackRef.current, start: "top 100%", once: true },
       });
     }, sectionRef);
     return () => ctx.revert();
