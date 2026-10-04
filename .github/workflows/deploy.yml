@@ -32,9 +32,9 @@ jobs:
         run: |
           lftp -c "
             set ftp:ssl-allow no;
-            set net:timeout 30;
+            set net:timeout 60;
             set net:max-retries 3;
             open ftp://${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}@${{ secrets.FTP_SERVER }};
-            mirror --reverse --delete --verbose ./out/ /public_html/;
+            mirror --reverse --delete --verbose --exclude videos/ ./out/ /public_html/;
             bye
           "
