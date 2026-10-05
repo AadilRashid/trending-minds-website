@@ -29,20 +29,34 @@ const REELS = [
   { id: "r5", url: "https://www.instagram.com/p/DaxiIhIBXwf/", caption: "Trending Minds" },
 ];
 
-function LocalVideoCard({ video }) {
+function LocalVideoCard({ video, eager }) {
   const [muted, setMuted] = useState(true);
+  const [inView, setInView] = useState(eager);
+  const wrapRef = useRef(null);
+
+  useEffect(() => {
+    if (eager) return;
+    const obs = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setInView(true); obs.disconnect(); } },
+      { threshold: 0.1 }
+    );
+    if (wrapRef.current) obs.observe(wrapRef.current);
+    return () => obs.disconnect();
+  }, [eager]);
 
   return (
-    <div className="reel-card shrink-0 w-[280px] md:w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] border border-white/10 hover:border-[#00ff87]/40 transition-all duration-500 relative group">
-      <video
-        src={video.src}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        className="w-full h-full object-cover"
-      />
+    <div ref={wrapRef} className="reel-card shrink-0 w-[280px] md:w-[320px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] border border-white/10 hover:border-[#00ff87]/40 transition-all duration-500 relative group">
+      {inView && (
+        <video
+          src={video.src}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          className="w-full h-full object-cover"
+        />
+      )}
       {/* unmute toggle */}
       <button
         onClick={() => setMuted(m => !m)}
@@ -111,10 +125,6 @@ export default function ReelsShowcase() {
         y: 35, opacity: 0, duration: 0.5, ease: "power4.out", delay: 0.1,
         scrollTrigger: { trigger: sectionRef.current, start: "top 85%", once: true },
       });
-      gsap.from(".reel-card", {
-        x: 50, opacity: 0, stagger: 0.1, duration: 0.7, ease: "power3.out", delay: 0.2,
-        scrollTrigger: { trigger: trackRef.current, start: "top 100%", once: true },
-      });
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -150,9 +160,9 @@ export default function ReelsShowcase() {
         className="flex gap-5 px-10 md:px-20 overflow-x-auto pb-6 scrollbar-hide"
         style={{ scrollSnapType: "x mandatory" }}
       >
-        {LOCAL_VIDEOS.map((video) => (
+        {LOCAL_VIDEOS.map((video, i) => (
           <div key={video.id} style={{ scrollSnapAlign: "start" }}>
-            <LocalVideoCard video={video} />
+            <LocalVideoCard video={video} eager={i === 0} />
           </div>
         ))}
 
