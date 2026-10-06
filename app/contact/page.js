@@ -25,9 +25,27 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("sent");
-    setForm({ name: "", email: "", service: "", budget: "", message: "" });
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: "660cf5fe-a2fe-4e07-9d82-a05e3f95e2d7",
+          subject: `New enquiry from ${form.name}`,
+          from_name: "Trending Minds Website",
+          ...form,
+        }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("sent");
+        setForm({ name: "", email: "", service: "", budget: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   useEffect(() => {
@@ -134,7 +152,7 @@ export default function ContactPage() {
                 </div>
                 <button type="submit" disabled={status === "sending"}
                   className="c-field w-full bg-[#00ff87] text-black font-bold py-4 rounded-full text-sm uppercase tracking-widest hover:bg-white transition-colors duration-300 disabled:opacity-60 mt-2">
-                  {status === "sending" ? "Sending…" : "Send Message"}
+                  {status === "sending" ? "Sending…" : status === "error" ? "Something went wrong — try again" : "Send Message"}
                 </button>
               </form>
             )}

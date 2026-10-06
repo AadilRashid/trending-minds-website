@@ -11,7 +11,7 @@ const NAV_LINKS = [
 ];
 
 const SOCIALS = [
-  { label: "Instagram", href: "https://instagram.com" },
+  { label: "Instagram", href: "https://instagram.com/trending__minds" },
   { label: "LinkedIn", href: "https://linkedin.com" },
   { label: "TikTok", href: "https://tiktok.com" },
   { label: "X", href: "https://x.com" },

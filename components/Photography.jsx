@@ -112,7 +112,7 @@ export default function Photography() {
       {/* CTA */}
       <div className="mt-12 flex justify-center">
         <a
-          href="https://instagram.com/trendingminds"
+          href="https://instagram.com/trending__minds"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 px-8 py-4 border border-white/15 text-white/50 text-[11px] font-medium uppercase tracking-widest rounded-full hover:border-[#00ff87]/50 hover:text-[#00ff87] transition-all duration-300"
