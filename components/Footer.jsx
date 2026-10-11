@@ -69,6 +69,14 @@ export default function Footer() {
           © {new Date().getFullYear()} Trending Minds. All rights reserved.
         </p>
       </div>
+
+      <div className="flex justify-center mt-10 pt-8 border-t border-white/5">
+        <a href="https://www.nucleosight.com/contact" target="_blank" rel="noopener noreferrer"
+          className="flex items-center gap-2 opacity-30 hover:opacity-60 transition-opacity duration-300">
+          <img src="/images/nslogo.png" alt="Nucleosight" className="h-5 w-auto" />
+          <span className="text-[10px] text-white tracking-[0.3em] uppercase">Powered by Nucleosight</span>
+        </a>
+      </div>
     </footer>
   );
 }
