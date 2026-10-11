@@ -15,7 +15,7 @@ const nextConfig = {
               "frame-src https://www.instagram.com",
               "img-src 'self' data: https://www.instagram.com https://scontent*.cdninstagram.com https://scontent*.fbcdn.net",
               "style-src 'self' 'unsafe-inline'",
-              "connect-src 'self' https://www.instagram.com",
+              "connect-src 'self' https://www.instagram.com https://api.web3forms.com",
             ].join("; "),
           },
         ],

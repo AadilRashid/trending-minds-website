@@ -15,10 +15,31 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-    // Replace with your API endpoint or email service
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("sent");
-    setForm({ name: "", email: "", service: "", message: "" });
+    try {
+      const formData = new FormData();
+      formData.append("access_key", "fb451609-fd21-4852-83c6-030f68c01bed");
+      formData.append("subject", `New enquiry from ${form.name}`);
+      formData.append("from_name", "Trending Minds Website");
+      formData.append("replyto", form.email);
+      formData.append("botcheck", "");
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("service", form.service);
+      formData.append("message", form.message);
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json();
+      if (data.success) {
+        setStatus("sent");
+        setForm({ name: "", email: "", service: "", message: "" });
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   useEffect(() => {
@@ -71,6 +92,9 @@ export default function Contact() {
                 value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} />
             </div>
 
+            {status === "error" && (
+              <p className="text-red-400 text-xs uppercase tracking-widest">Something went wrong — please try again.</p>
+            )}
             {status === "sent" ? (
               <p className="contact-btn text-[#00ff87] text-sm uppercase tracking-widest font-bold">
                 Message sent — we'll be in touch within 24 hours!

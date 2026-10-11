@@ -24,6 +24,7 @@ export default function ContactPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Form submitted", form);
     setStatus("sending");
     try {
       const formData = new FormData();
@@ -37,18 +38,22 @@ export default function ContactPage() {
       formData.append("service", form.service);
       formData.append("budget", form.budget);
       formData.append("message", form.message);
+      console.log("Sending to Web3Forms...");
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData,
       });
       const data = await res.json();
+      console.log("Web3Forms response:", data);
       if (data.success) {
         setStatus("sent");
         setForm({ name: "", email: "", service: "", budget: "", message: "" });
       } else {
+        console.error("Web3Forms error:", data);
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      console.error("Fetch error:", err);
       setStatus("error");
     }
   };
