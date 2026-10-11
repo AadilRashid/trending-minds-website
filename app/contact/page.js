@@ -28,15 +28,21 @@ export default function ContactPage() {
     try {
       const formData = new FormData();
       formData.append("access_key", "fb451609-fd21-4852-83c6-030f68c01bed");
+      formData.append("subject", `New enquiry from ${form.name}`);
+      formData.append("from_name", "Trending Minds Website");
+      formData.append("replyto", form.email);
+      formData.append("botcheck", "");
       formData.append("name", form.name);
       formData.append("email", form.email);
-      formData.append("message", `Service: ${form.service}\nBudget: ${form.budget}\n\n${form.message}`);
+      formData.append("service", form.service);
+      formData.append("budget", form.budget);
+      formData.append("message", form.message);
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData,
       });
       const data = await res.json();
-      if (res.ok) {
+      if (data.success) {
         setStatus("sent");
         setForm({ name: "", email: "", service: "", budget: "", message: "" });
       } else {
