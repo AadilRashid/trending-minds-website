@@ -30,7 +30,7 @@ export default function ContactPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "660cf5fe-a2fe-4e07-9d82-a05e3f95e2d7",
+          access_key: "f85430a9-310a-4a04-a46f-f977d9cb1d48",
           subject: `New enquiry from ${form.name}`,
           from_name: "Trending Minds Website",
           ...form,
