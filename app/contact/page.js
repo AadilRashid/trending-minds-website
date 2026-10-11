@@ -26,19 +26,17 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus("sending");
     try {
+      const formData = new FormData();
+      formData.append("access_key", "fb451609-fd21-4852-83c6-030f68c01bed");
+      formData.append("name", form.name);
+      formData.append("email", form.email);
+      formData.append("message", `Service: ${form.service}\nBudget: ${form.budget}\n\n${form.message}`);
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          access_key: "fb451609-fd21-4852-83c6-030f68c01bed",
-          subject: `New enquiry from ${form.name}`,
-          from_name: "Trending Minds Website",
-          replyto: form.email,
-          ...form,
-        }),
+        body: formData,
       });
       const data = await res.json();
-      if (data.success) {
+      if (res.ok) {
         setStatus("sent");
         setForm({ name: "", email: "", service: "", budget: "", message: "" });
       } else {
