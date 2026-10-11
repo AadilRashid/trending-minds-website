@@ -30,9 +30,10 @@ export default function ContactPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          access_key: "f85430a9-310a-4a04-a46f-f977d9cb1d48",
+          access_key: "fb451609-fd21-4852-83c6-030f68c01bed",
           subject: `New enquiry from ${form.name}`,
           from_name: "Trending Minds Website",
+          replyto: form.email,
           ...form,
         }),
       });
@@ -87,7 +88,7 @@ export default function ContactPage() {
             </p>
             <div className="flex flex-col gap-4">
               {[
-                { label: "Email", value: "hello@trendingminds.video" },
+                { label: "Email", value: "contact@trendingminds.video" },
                 { label: "Instagram", value: "@trending__minds" },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-4">

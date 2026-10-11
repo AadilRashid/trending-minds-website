@@ -63,7 +63,7 @@ export default function Footer() {
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <p className="text-[10px] text-white/20 tracking-widest" style={{ fontFamily: '"Times New Roman", Times, serif', fontStyle: "italic" }}>
-          hello@trendingminds.video
+          contact@trendingminds.video
         </p>
         <p className="text-[10px] text-white/15 tracking-[0.3em] uppercase">
           © {new Date().getFullYear()} Trending Minds. All rights reserved.
