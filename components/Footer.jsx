@@ -12,9 +12,6 @@ const NAV_LINKS = [
 
 const SOCIALS = [
   { label: "Instagram", href: "https://instagram.com/trending__minds" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "TikTok", href: "https://tiktok.com" },
-  { label: "X", href: "https://x.com" },
 ];
 
 export default function Footer() {
@@ -34,7 +31,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer ref={ref} className="relative border-t border-white/8 px-10 md:px-20 py-16">
+    <footer ref={ref} className="relative border-t border-white/8 px-5 sm:px-8 lg:px-16 py-16">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-16">
         <div>
           <p className="text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-4 font-medium">Social Media & Digital Media Agency</p>
@@ -45,12 +42,12 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col gap-8 md:items-end">
-          <nav className="flex gap-8 text-[11px] uppercase tracking-[0.3em] font-medium">
+          <nav className="flex flex-wrap gap-x-6 gap-y-3 text-[10px] uppercase tracking-[0.2em] font-medium">
             {NAV_LINKS.map(({ label, href }) => (
               <Link key={href} href={href} className="text-white/40 hover:text-[#00ff87] transition-colors duration-300">{label}</Link>
             ))}
           </nav>
-          <div className="flex flex-wrap gap-8 text-[11px] uppercase tracking-[0.3em] font-medium">
+          <div className="flex flex-wrap gap-x-6 gap-y-3 text-[10px] uppercase tracking-[0.2em] font-medium">
             {SOCIALS.map(({ label, href }) => (
               <a key={label} href={href} target="_blank" rel="noopener noreferrer"
                 className="text-white/25 hover:text-white/70 transition-colors duration-300">{label}</a>
