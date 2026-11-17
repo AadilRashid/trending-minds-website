@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 import Cursor from "@/components/Cursor";
 import Navbar from "@/components/Navbar";
 import Background from "@/components/Background";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import ReelsShowcase from "@/components/ReelsShowcase";
@@ -25,7 +26,7 @@ export default function Home() {
   const footerRef = useRef(null);
 
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true, wheelMultiplier: 1 });
+    const lenis = new Lenis({ lerp: 0.07, smoothWheel: true, wheelMultiplier: 0.8, duration: 1.4, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
 
     lenis.on("scroll", () => {
       ScrollTrigger.update();
@@ -49,6 +50,7 @@ export default function Home() {
       <div className="grain-overlay" />
       <Cursor />
       <Background />
+      <WhatsAppButton />
       <Navbar />
       <div ref={blurWrapRef} className="bottom-blur" />
 

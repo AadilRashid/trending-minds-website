@@ -40,6 +40,9 @@ yarn-error.log*
 out/
 site.zip
 
+# videos (uploaded manually to Hostinger)
+public/videos/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
