@@ -29,7 +29,7 @@ export default function AboutPage() {
   const pageRef = useRef(null);
 
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, syncTouch: false });
     lenis.on("scroll", () => ScrollTrigger.update());
     const tick = (t) => lenis.raf(t * 1000);
     gsap.ticker.add(tick);
@@ -62,7 +62,7 @@ export default function AboutPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative min-h-[70vh] flex flex-col justify-center px-10 md:px-20 pt-40 pb-20">
+      <section className="relative min-h-[65vh] flex flex-col justify-center px-5 sm:px-8 lg:px-16 pt-36 pb-20">
         <p className="a-label text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">Our Story</p>
         <h1 className="a-h font-black tracking-tighter text-white leading-none hero-clamp max-w-4xl">
           We don't make<br />content. <span className="ghost">We make noise.</span>
@@ -73,7 +73,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission statement */}
-      <section className="px-10 md:px-20 py-24 border-t border-white/5">
+      <section className="px-5 sm:px-8 lg:px-16 py-24 border-t border-white/5">
         <div className="max-w-4xl">
           <p className="text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-8 font-medium">Why We Exist</p>
           <p className="text-2xl md:text-4xl font-black tracking-tighter text-white leading-tight">
@@ -86,7 +86,7 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="values-section px-10 md:px-20 py-24 border-t border-white/5">
+      <section className="values-section px-5 sm:px-8 lg:px-16 py-24 border-t border-white/5">
         <p className="text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">How We Work</p>
         <h2 className="font-black tracking-tighter text-white leading-none section-clamp mb-16 max-w-xl">
           Our<br /><span className="ghost">principles.</span>
@@ -103,7 +103,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team */}
-      <section className="team-section px-10 md:px-20 py-24 border-t border-white/5">
+      <section className="team-section px-5 sm:px-8 lg:px-16 py-24 border-t border-white/5">
         <p className="text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">The Team</p>
         <h2 className="font-black tracking-tighter text-white leading-none section-clamp mb-16 max-w-xl">
           The people<br /><span className="ghost">behind it.</span>
@@ -121,7 +121,7 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="px-10 md:px-20 py-24 border-t border-white/5">
+      <section className="px-5 sm:px-8 lg:px-16 py-24 border-t border-white/5">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden">
           {[
             { value: "42M+", label: "Organic Views" },
@@ -138,7 +138,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="px-10 md:px-20 py-32 border-t border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-10">
+      <section className="px-5 sm:px-8 lg:px-16 py-32 border-t border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-10">
         <h2 className="font-black tracking-tighter text-white leading-none section-clamp max-w-xl">
           Let's build<br /><span className="ghost">something.</span>
         </h2>

@@ -28,8 +28,8 @@ const spanClass = {
 function PhotoCard({ photo }) {
   return (
     <div
-      className={`photo-card group relative overflow-hidden rounded-xl border border-white/10 hover:border-white/25 transition-all duration-500 ${spanClass[photo.span]}`}
-      style={{ minHeight: photo.span === "wide" ? "260px" : "320px" }}
+      className={`photo-card group relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/25 transition-all duration-500 ${spanClass[photo.span]}`}
+      style={{ minHeight: photo.span === "wide" ? "220px" : "280px" }}
     >
       {photo.src ? (
         <img
@@ -39,7 +39,7 @@ function PhotoCard({ photo }) {
         />
       ) : (
         <div className="absolute inset-0 bg-[#111]">
-          <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(255,107,26,0.06) 0%, transparent 65%)" }} />
+          <div className="absolute inset-0" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, rgba(0,255,135,0.07) 0%, transparent 65%)" }} />
           <div className="absolute inset-0" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
           <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
             <Camera size={22} strokeWidth={1} className="text-white/20" />
@@ -103,7 +103,7 @@ export default function Photography() {
       </div>
 
       {/* Masonry grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 auto-rows-[260px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-[220px] md:auto-rows-[260px]">
         {PHOTOS.map((photo) => (
           <PhotoCard key={photo.id} photo={photo} />
         ))}

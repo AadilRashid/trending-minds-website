@@ -161,7 +161,7 @@ export default function PricingPage() {
   const pageRef = useRef(null);
 
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, syncTouch: false });
     lenis.on("scroll", () => ScrollTrigger.update());
     const tick = (t) => lenis.raf(t * 1000);
     gsap.ticker.add(tick);
@@ -204,7 +204,7 @@ export default function PricingPage() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section className="relative min-h-[70vh] flex flex-col justify-center px-10 md:px-20 pt-40 pb-24">
+      <section className="relative min-h-[65vh] flex flex-col justify-center px-5 sm:px-8 lg:px-16 pt-36 pb-24">
         <p className="p-hero-label text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">Pricing</p>
         <h1 className="p-hero-h font-black tracking-tighter text-white leading-none hero-clamp max-w-4xl">
           Instagram,<br /><span className="ghost">fully managed.</span>
@@ -224,7 +224,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── PLANS ── */}
-      <section id="plans" className="px-10 md:px-20 py-24">
+      <section id="plans" className="px-5 sm:px-8 lg:px-16 py-24">
         <div className="plans-grid grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
           {PLANS.map((plan) => (
             <div
@@ -285,7 +285,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── WHAT HAPPENS EVERY MONTH ── */}
-      <section className="px-10 md:px-20 py-24 border-t border-white/5">
+      <section className="px-5 sm:px-8 lg:px-16 py-24 border-t border-white/5">
         <p className="text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">The Process</p>
         <h2 className="font-black tracking-tighter text-white leading-none section-clamp mb-16 max-w-2xl">
           What happens<br /><span className="ghost">every month.</span>
@@ -317,7 +317,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="faq-section px-10 md:px-20 py-24 border-t border-white/5">
+      <section className="faq-section px-5 sm:px-8 lg:px-16 py-24 border-t border-white/5">
         <p className="text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">FAQ</p>
         <h2 className="font-black tracking-tighter text-white leading-none section-clamp mb-16 max-w-xl">
           Good<br /><span className="ghost">questions.</span>
@@ -328,7 +328,7 @@ export default function PricingPage() {
       </section>
 
       {/* ── FINAL CTA ── */}
-      <section className="final-cta px-10 md:px-20 py-32 border-t border-white/5">
+      <section className="final-cta px-5 sm:px-8 lg:px-16 py-32 border-t border-white/5">
         <p className="text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">Ready?</p>
         <h2 className="font-black tracking-tighter text-white leading-none section-clamp max-w-3xl">
           Ready to take<br /><span className="ghost">Instagram seriously?</span>

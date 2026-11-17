@@ -43,7 +43,7 @@ export default function WorkPage() {
   const pageRef = useRef(null);
 
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, syncTouch: false });
     lenis.on("scroll", () => ScrollTrigger.update());
     const tick = (t) => lenis.raf(t * 1000);
     gsap.ticker.add(tick);
@@ -72,7 +72,7 @@ export default function WorkPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex flex-col justify-center px-10 md:px-20 pt-40 pb-20">
+      <section className="relative min-h-[58vh] flex flex-col justify-center px-5 sm:px-8 lg:px-16 pt-36 pb-20">
         <p className="w-label text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">Selected Work</p>
         <h1 className="w-h font-black tracking-tighter text-white leading-none hero-clamp max-w-4xl">
           Work that<br /><span className="ghost">speaks.</span>
@@ -83,7 +83,7 @@ export default function WorkPage() {
       </section>
 
       {/* Case studies */}
-      <section className="cases-grid px-10 md:px-20 pb-32 grid grid-cols-1 md:grid-cols-2 gap-5">
+      <section className="cases-grid px-5 sm:px-8 lg:px-16 pb-32 grid grid-cols-1 md:grid-cols-2 gap-5">
         {CASE_STUDIES.map((c) => (
           <div key={c.num} className="case-card group relative rounded-2xl border border-white/8 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 p-8 md:p-10 flex flex-col justify-between min-h-[380px]">
             <div>
@@ -112,7 +112,7 @@ export default function WorkPage() {
       </section>
 
       {/* CTA */}
-      <section className="px-10 md:px-20 py-32 border-t border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-10">
+      <section className="px-5 sm:px-8 lg:px-16 py-32 border-t border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-10">
         <h2 className="font-black tracking-tighter text-white leading-none section-clamp max-w-xl">
           Want results<br /><span className="ghost">like these?</span>
         </h2>
