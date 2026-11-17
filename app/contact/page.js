@@ -24,7 +24,6 @@ export default function ContactPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted", form);
     setStatus("sending");
     try {
       const formData = new FormData();
@@ -38,28 +37,24 @@ export default function ContactPage() {
       formData.append("service", form.service);
       formData.append("budget", form.budget);
       formData.append("message", form.message);
-      console.log("Sending to Web3Forms...");
       const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: formData,
       });
       const data = await res.json();
-      console.log("Web3Forms response:", data);
       if (data.success) {
         setStatus("sent");
         setForm({ name: "", email: "", service: "", budget: "", message: "" });
       } else {
-        console.error("Web3Forms error:", data);
         setStatus("error");
       }
     } catch (err) {
-      console.error("Fetch error:", err);
       setStatus("error");
     }
   };
 
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, syncTouch: false });
     lenis.on("scroll", () => ScrollTrigger.update());
     const tick = (t) => lenis.raf(t * 1000);
     gsap.ticker.add(tick);
@@ -83,12 +78,12 @@ export default function ContactPage() {
       <Background />
       <Navbar />
 
-      <section className="relative min-h-screen px-10 md:px-20 pt-40 pb-32">
+      <section className="relative min-h-screen px-5 sm:px-8 lg:px-16 pt-36 pb-32">
         <div className="flex flex-col lg:flex-row gap-20 lg:gap-32 w-full max-w-7xl">
 
           {/* Left */}
           <div className="lg:w-[45%]">
-            <p className="c-label text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">Get In Touch</p>
+            <p className="c-label text-[10px] text-[#00ff87] tracking-[0.35em] uppercase mb-6 font-semibold">Get In Touch</p>
             <h1 className="c-h font-black tracking-tighter text-white leading-none mb-8" style={{ fontSize: "clamp(3rem, 7vw, 6.5rem)" }}>
               Got something<br />worth saying?<br /><span className="ghost">Let's make it travel.</span>
             </h1>
