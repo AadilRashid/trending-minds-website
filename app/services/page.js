@@ -58,7 +58,7 @@ export default function ServicesPage() {
   const pageRef = useRef(null);
 
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, syncTouch: false });
     lenis.on("scroll", () => ScrollTrigger.update());
     const tick = (t) => lenis.raf(t * 1000);
     gsap.ticker.add(tick);
@@ -87,7 +87,7 @@ export default function ServicesPage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex flex-col justify-center px-10 md:px-20 pt-40 pb-20">
+      <section className="relative min-h-[58vh] flex flex-col justify-center px-5 sm:px-8 lg:px-16 pt-36 pb-20">
         <p className="s-label text-[10px] text-[#00ff87] tracking-[0.5em] uppercase mb-6 font-medium">What We Do</p>
         <h1 className="s-h font-black tracking-tighter text-white leading-none hero-clamp max-w-4xl">
           Services that<br /><span className="ghost">move brands.</span>
@@ -98,7 +98,7 @@ export default function ServicesPage() {
       </section>
 
       {/* Services list */}
-      <section className="svc-list px-10 md:px-20 pb-32">
+      <section className="svc-list px-5 sm:px-8 lg:px-16 pb-32">
         {SERVICES.map((svc) => (
           <div key={svc.num} className="svc-row group border-t border-white/8 hover:border-white/20 transition-colors duration-500 py-12 md:py-16 flex flex-col md:flex-row gap-8 md:gap-16">
             <div className="shrink-0 flex items-start gap-6 md:w-[320px]">
@@ -125,7 +125,7 @@ export default function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="px-10 md:px-20 py-32 border-t border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-10">
+      <section className="px-5 sm:px-8 lg:px-16 py-32 border-t border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-10">
         <div>
           <h2 className="font-black tracking-tighter text-white leading-none section-clamp max-w-xl">
             Ready to<br /><span className="ghost">get started?</span>
