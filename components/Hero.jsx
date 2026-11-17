@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,106 +11,98 @@ export default function Hero() {
   const ref = useRef(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".hero-label", { y: 16, opacity: 0, duration: 0.7, ease: "power3.out", delay: 0.3 });
-      gsap.from(".hero-word", {
-        y: 110, opacity: 0, rotateX: -30,
-        stagger: 0.08, duration: 1.1, ease: "power4.out", delay: 0.5,
-      });
-      gsap.from(".hero-sub",  { y: 20, opacity: 0, duration: 0.7, ease: "power3.out", delay: 1.1 });
-      gsap.from(".hero-cta",  { y: 20, opacity: 0, duration: 0.6, ease: "power3.out", delay: 1.3 });
-      gsap.from(".hero-reel", { x: 60, opacity: 0, duration: 1.0, ease: "power3.out", delay: 0.9 });
+    const root = ref.current;
+    if (!root) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return;
 
-      gsap.to(ref.current, {
-        scrollTrigger: { trigger: ref.current, start: "bottom 55%", end: "bottom 5%", scrub: 1.2 },
-        opacity: 0, y: -60,
+    const ctx = gsap.context(() => {
+      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+      intro
+        .from(".hero-kicker", { y: 14, opacity: 0, duration: .55 })
+        .from(".hero-line", { yPercent: 115, opacity: 0, rotateX: -14, stagger: .11, duration: .9 }, "-=.2")
+        .from(".hero-copy, .hero-actions", { y: 18, opacity: 0, duration: .65, stagger: .12 }, "-=.35")
+        .from(".hero-film", { y: 26, opacity: 0, scale: .97, duration: .9 }, "-=.7")
+        .from(".hero-footnote", { opacity: 0, duration: .5 }, "-=.35");
+
+      gsap.to(".hero-content", {
+        y: -48,
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: { trigger: root, start: "bottom 78%", end: "bottom 18%", scrub: 1 },
       });
-    }, ref);
+    }, root);
     return () => ctx.revert();
   }, []);
 
-  const words = ["We", "make", "people", "stop", "scrolling."];
-
   return (
-    <section
-      ref={ref}
-      className="relative min-h-screen flex items-center px-10 md:px-20 pt-32 pb-20 overflow-hidden"
-    >
-      <div className="relative z-10 w-full flex flex-col lg:flex-row lg:items-center lg:justify-between gap-16">
-
-        {/* Left — headline */}
-        <div className="flex-1 max-w-3xl">
-          <p className="hero-label text-[10px] text-[#00ff87] tracking-[0.35em] uppercase font-semibold mb-8 flex items-center gap-3">
-            <span className="w-6 h-px bg-[#00ff87]" />
-            Social Media · Digital Media Agency
+    <section ref={ref} className="relative flex min-h-[100svh] items-center overflow-hidden px-5 pb-20 pt-32 md:px-10 lg:px-16">
+      <div className="hero-content relative z-10 mx-auto grid w-full max-w-[1500px] items-center gap-14 lg:grid-cols-[minmax(0,1.25fr)_minmax(280px,.75fr)] lg:gap-16">
+        <div className="max-w-[900px]">
+          <p className="hero-kicker mb-8 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[.34em] text-[#00ff87] md:mb-10">
+            <span className="h-px w-8 bg-[#00ff87]" />
+            Independent social & digital studio
           </p>
 
-          <h1
-            className="font-black tracking-tighter leading-[0.82] mb-10"
-            style={{ fontSize: "clamp(4.2rem, 11vw, 10.5rem)", perspective: "1000px" }}
-          >
-            {words.map((word, i) => (
-              <span key={i} className="hero-word inline-block mr-[0.18em] last:mr-0">
-                {word === "stop" || word === "scrolling."
-                  ? <span className="text-[#00ff87]">{word}</span>
-                  : <span className="text-white">{word}</span>
-                }
-              </span>
-            ))}
+          <h1 className="mb-8 font-black leading-[.82] tracking-[-.075em]" style={{ fontSize: "clamp(4rem, 10.7vw, 10.2rem)" }}>
+            <span className="block overflow-hidden pb-[.08em]"><span className="hero-line inline-block">We make</span></span>
+            <span className="block overflow-hidden pb-[.08em]"><span className="hero-line inline-block text-white/90">people stop</span></span>
+            <span className="block overflow-hidden pb-[.08em]"><span className="hero-line inline-block text-[#00ff87]">scrolling<span className="text-white">.</span></span></span>
           </h1>
 
-          <p className="hero-sub text-white/40 text-base md:text-lg font-light leading-relaxed max-w-md mb-10">
-            Short-form content for brands that want attention.<br />
-            <span className="text-white/20 text-sm">Instagram · TikTok · YouTube Shorts</span>
+          <p className="hero-copy max-w-[430px] text-base font-light leading-relaxed text-white/55 md:text-lg">
+            Short-form content with a point of view. We help ambitious brands earn attention, build relevance and turn audiences into action.
           </p>
 
-          <div className="hero-cta flex items-center gap-4 flex-wrap">
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#00ff87] text-black font-bold rounded-full text-sm uppercase tracking-widest hover:bg-white transition-colors duration-300"
-            >
-              Start a Project
-              <ArrowRight size={14} strokeWidth={2.5} />
+          <div className="hero-actions mt-9 flex flex-wrap items-center gap-3">
+            <Link href="/contact" className="group inline-flex items-center gap-8 rounded-full bg-[#00ff87] px-6 py-4 text-[11px] font-bold uppercase tracking-[.18em] text-black transition-all duration-300 hover:bg-white">
+              Start a project
+              <ArrowUpRight size={16} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
             </Link>
-            <Link
-              href="/work"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-white/50 font-medium rounded-full text-sm uppercase tracking-widest hover:border-white/40 hover:text-white transition-colors duration-300"
-            >
-              See Our Work
+            <Link href="/work" className="group inline-flex items-center gap-3 rounded-full border border-white/20 px-6 py-4 text-[11px] font-semibold uppercase tracking-[.18em] text-white/70 transition-colors duration-300 hover:border-[#00ff87]/70 hover:text-white">
+              Explore our work <ArrowDownRight size={15} className="text-[#00ff87]" />
             </Link>
           </div>
         </div>
 
-        {/* Right — reel card */}
-        <div className="hero-reel shrink-0 flex justify-center lg:block">
-          <div className="relative w-[180px] lg:w-[220px] aspect-[9/16] rounded-2xl overflow-hidden bg-[#111] border border-white/10">
+        <div className="hero-film mx-auto w-full max-w-[390px] lg:ml-auto lg:mr-0">
+          <div className="mb-3 flex items-center justify-between text-[9px] uppercase tracking-[.25em] text-white/35">
+            <span>In the feed / out in the world</span>
+            <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[#00ff87] shadow-[0_0_12px_#00ff87]" /> Featured reel</span>
+          </div>
+          <div className="group relative aspect-[4/5] overflow-hidden rounded-[1.35rem] border border-white/12 bg-[#111713] shadow-[0_30px_100px_rgba(0,0,0,.5)]">
             <video
               src="/videos/dont-pitch.mp4"
               autoPlay
               muted
               loop
               playsInline
-              preload="auto"
-              className="absolute inset-0 w-full h-full object-cover"
+              preload="metadata"
+              aria-label="Featured short-form video produced by Trending Minds"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
               ref={(el) => { if (el) { el.muted = true; el.play().catch(() => {}); } }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-4">
-              <p className="text-white/60 text-[10px] tracking-widest uppercase">Latest Reel</p>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/10" />
+            <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between p-5 md:p-6">
+              <div>
+                <p className="mb-2 text-[9px] uppercase tracking-[.28em] text-[#00ff87]">Make them look twice</p>
+                <p className="text-2xl font-semibold tracking-tight">Built for the scroll.</p>
+              </div>
+              <span className="grid h-10 w-10 place-items-center rounded-full border border-white/35 bg-black/20 text-white backdrop-blur-sm"><ArrowUpRight size={17} /></span>
             </div>
           </div>
-          <div className="mt-4 flex items-center justify-center gap-2">
-            <span className="text-[#00ff87] font-black text-lg tracking-tighter">42M+</span>
-            <span className="text-white/30 text-[10px] tracking-widest uppercase">organic views</span>
+          <div className="mt-5 flex items-end justify-between border-t border-white/12 pt-4">
+            <div><p className="text-[9px] uppercase tracking-[.25em] text-white/35">Reach that travels</p><p className="mt-1 text-3xl font-bold tracking-[-.06em] text-[#00ff87]">42M<span className="text-white">+</span></p></div>
+            <p className="max-w-[125px] text-right text-[9px] uppercase leading-relaxed tracking-[.2em] text-white/35">Organic views<br />across our work</p>
           </div>
         </div>
-
       </div>
 
-      {/* scroll hint */}
-      <p className="absolute bottom-8 left-10 md:left-20 text-[10px] text-white/25 tracking-[0.4em] uppercase">
-        Scroll ↓
-      </p>
+      <div className="hero-footnote absolute bottom-7 left-5 right-5 z-10 flex items-center justify-between border-t border-white/10 pt-4 text-[9px] uppercase tracking-[.25em] text-white/30 md:left-10 md:right-10 lg:left-16 lg:right-16">
+        <span>Instagram · TikTok · YouTube Shorts</span>
+        <span className="hidden items-center gap-2 sm:flex">Scroll to explore <span className="text-[#00ff87]">↓</span></span>
+        <span className="sm:hidden">01 / 06</span>
+      </div>
     </section>
   );
 }
