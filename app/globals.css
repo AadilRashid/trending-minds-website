@@ -6,43 +6,54 @@
 }
 
 :root {
+  color-scheme: dark;
   --accent: #00ff87;
+  --ink: #080a09;
+  --surface: #101311;
+  --muted: rgba(255,255,255,.48);
+  --page-gutter: clamp(1.25rem, 5vw, 5rem);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
-@media (pointer: fine) {
-  * { cursor: none !important; }
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,255,135,.28) transparent;
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  background: #080808;
+  min-height: 100%;
+  background: var(--ink);
   color: #fff;
   font-family: var(--font-inter), "Inter", sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
-html { scrollbar-width: none; }
-html::-webkit-scrollbar { display: none; }
-
-::selection { background: #00ff87; color: #000; }
+body { text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+button, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+::selection { background: var(--accent); color: #000; }
 
 .ghost {
   font-family: var(--font-playfair), "Playfair Display", serif;
   font-style: italic;
   font-weight: 400;
   color: transparent;
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.45);
+  -webkit-text-stroke: 1.5px rgba(255,255,255,.45);
 }
-
 .ghost-accent {
   font-family: var(--font-playfair), "Playfair Display", serif;
   font-style: italic;
   font-weight: 400;
   color: transparent;
-  -webkit-text-stroke: 1.2px #00ff87;
+  -webkit-text-stroke: 1.2px var(--accent);
 }
 
 .grain-overlay {
@@ -50,43 +61,44 @@ html::-webkit-scrollbar { display: none; }
   inset: 0;
   pointer-events: none;
   z-index: 999;
-  opacity: 0.04;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-
 .bottom-blur {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 120px;
   pointer-events: none;
   z-index: 40;
-  background: linear-gradient(to bottom, transparent 0%, rgba(8,8,8,0.6) 50%, rgba(8,8,8,0.95) 100%);
+  background: linear-gradient(to bottom, transparent, rgba(8,10,9,.62) 55%, rgba(8,10,9,.94));
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   mask-image: linear-gradient(to bottom, transparent, black 60%);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 60%);
 }
-
 .hero-clamp { font-size: clamp(4rem, 12vw, 11rem); }
 .section-clamp { font-size: clamp(3rem, 8vw, 7rem); }
 
-/* Marquee */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 22s linear infinite;
+  animation: marquee 26s linear infinite;
 }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .marquee-track:hover { animation-play-state: paused; }
 
-.custom-scroll { scrollbar-width: thin; scrollbar-color: rgba(255,107,26,0.4) transparent; }
+.custom-scroll { scrollbar-width: thin; scrollbar-color: rgba(0,255,135,.35) transparent; }
 .custom-scroll::-webkit-scrollbar { width: 4px; }
-.custom-scroll::-webkit-scrollbar-thumb { background: rgba(255,107,26,0.35); border-radius: 99px; }
-
+.custom-scroll::-webkit-scrollbar-thumb { background: rgba(0,255,135,.35); border-radius: 99px; }
 .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
